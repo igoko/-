@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Продуктивность</string>
+    <string name="Answer_Button">OK</string>
+    <string name="Send_Rating">Поставить оценку</string>
+    <string name="Watch_Graph">Посмотреть график</string>
+    <string name="Setting">Настройки</string>
+    <string name="Exit">Выйти</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="Instruction">Для полезности приложения требуется включить уведомления нажав последнюю кнопку в настройках,
+    для отключения этой функции необходимо ещё раз использовать её</string>
+    <string name="Title">Выберете кнопкой за какой период хотите
+        увидеть график</string>
+</resources>
