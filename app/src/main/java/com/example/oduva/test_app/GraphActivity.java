@@ -27,6 +27,7 @@ public class GraphActivity extends AppCompatActivity {
     int [] marks;
     int [] hours;
     int wAverage []=new int[7];
+    int [] mDays;
     int [] mAverage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +82,8 @@ public class GraphActivity extends AppCompatActivity {
         }
         IDCount.close();
 
-        marks=new int[k];
         mAverage=new int[k];
+        mDays=new int[k];
 
         Cursor dayOfmouth=database.query(dbhelper.TABLE_CONTACTS,null,null,null,null,null,null);
         if(dayOfmouth.moveToFirst()){
@@ -100,6 +101,7 @@ public class GraphActivity extends AppCompatActivity {
 
                 if(cMouth.equals(mouth)){
                     if(cDay.equals(String.valueOf(day2))){
+
                         average+=dayOfmouth.getInt(mark);
                         count++;
                     }
@@ -111,6 +113,7 @@ public class GraphActivity extends AppCompatActivity {
                         if(count>0){
                             average=average/count;
                             mAverage[aID]=average;
+                            mDays[aID]=day2;
                             aID++;
                             count=0;
 
@@ -127,7 +130,24 @@ public class GraphActivity extends AppCompatActivity {
             }while(dayOfmouth.moveToNext());
             average=average/count;
             mAverage[aID]=average;
+            mDays[aID]=day2;
         }
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(0,0),
+        });
+        int i=0;
+
+
+        for(int j=0; j<k;j++) {
+            if(mAverage[i]!=0){
+                series.appendData(new DataPoint(mDays[i], mAverage[i]), true, 40);
+            }
+            i++;
+        }
+        mGraph.addSeries(series);
+        mGraph.getViewport().setYAxisBoundsManual(true);
+        mGraph.getViewport().setXAxisBoundsManual(true);
+        mGraph.getViewport().setMinimalViewport(1,31,0,10);
     }
 
     public void ShowGraphicsOfWeek(){
@@ -220,7 +240,7 @@ public class GraphActivity extends AppCompatActivity {
         mGraph.addSeries(series);
         mGraph.getViewport().setYAxisBoundsManual(true);
         mGraph.getViewport().setXAxisBoundsManual(true);
-        mGraph.getViewport().setMinimalViewport(1,24,0,10);
+        mGraph.getViewport().setMinimalViewport(1,7,0,10);
     }
 
     public void ShowGraphicsOfDay(){

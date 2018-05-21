@@ -7,8 +7,9 @@
 <com.jjoe64.graphview.GraphView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="350dp"
     android:layout_height="200dip"
+    android:layout_gravity="center"
     android:id="@+id/graph"
     tools:context="com.example.oduva.test_app.GraphActivity"
 

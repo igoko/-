@@ -65,7 +65,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent1);
                 break;
             case R.id.button:
-                Cursor fine = database.query(dbhelper.TABLE_CONTACTS,null,null,null,null,null,null);
+               /* Cursor fine = database.query(dbhelper.TABLE_CONTACTS,null,null,null,null,null,null);
                 int ID1, k,t1,t2;
                 t1=60;
                 t2=60;
@@ -122,8 +122,9 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
                                 ", name = " + cursor.getString(nameIndex));
                     } while (cursor.moveToNext());
                 }
-                cursor.close();
-                /*startActivity(new Intent (this, Notify_Class.class));*/
+                cursor.close();*/
+                startActivity(new Intent (this, Notify_Class.class));
+                finish();
                 break;
         }
 

@@ -71,35 +71,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         SQLiteDatabase database = mDbhelper.getWritableDatabase();
+
+		//Здесь я получаю количевство текущее время
         StringBuilder msgStr = new StringBuilder(" ");
         Format formatter = new SimpleDateFormat("HH:mm");
         msgStr.append(formatter.format(new Date()));
         String time=msgStr.toString();
 		formatter = new SimpleDateFormat("FF dd.MM");
 
+		//Очистка переменной для внесение новых значениий
 		int count = msgStr.length();
-
 		msgStr.delete(0,count);
 
+		//Здесь получаю число недели, а также текущую дату
 		msgStr.append(formatter.format(new Date()));
 		String date = msgStr.toString();
 		count = date.length();
         ContentValues contentValues = new ContentValues();
 
+		//Это обработчик кнопок
         switch (v.getId()){
             case R.id.OK:
-
-                //Здесь я получаю количевство часов
                 Cursor cursor = database.query(dbhelper.TABLE_CONTACTS, null, null, null, null, null, null);
-                //Реализация дня
-                contentValues.put(dbhelper.KEY_MARK, sMark);
-                contentValues.put(dbhelper.KEY_TIME, time);
-                contentValues.put(dbhelper.KEY_DAY_OF_WEEK, date.substring(0,date.indexOf(' ')));
-                contentValues.put(dbhelper.KEY_DAY_AND_MONTH,date.substring(count-5,count));
-                database.insert(dbhelper.TABLE_CONTACTS, null, contentValues);
-                /*Toast.makeText(this,"Выполнено",Toast.LENGTH_SHORT).show();*/
+                //Реализация ввода данных
+                contentValues.put(dbhelper.KEY_MARK, sMark);//Здесь отправляется оценка
+                contentValues.put(dbhelper.KEY_TIME, time);//Здесь текущее время
+                contentValues.put(dbhelper.KEY_DAY_OF_WEEK, date.substring(0,date.indexOf(' ')));//Неделя в месяце
+                contentValues.put(dbhelper.KEY_DAY_AND_MONTH,date.substring(count-5,count));//Дата и месяц
+                database.insert(dbhelper.TABLE_CONTACTS, null, contentValues);//Отправка
+                Toast.makeText(this,"Выполнено",Toast.LENGTH_SHORT).show();//Всплывающее уведомление о том что всё успешно
                 break;
-                //Конец Дня
         }
         }
     }
